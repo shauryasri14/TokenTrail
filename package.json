@@ -1,0 +1,13 @@
+{
+  "name": "tokentrail",
+  "version": "0.1.0",
+  "description": "Cross-browser extension that tracks AI chat token usage and saves chat context for handoff.",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "test": "node --test test/",
+    "icons": "node scripts/make-icons.js",
+    "lint": "npx --yes web-ext@8 lint --source-dir . --ignore-files test scripts package.json README.md",
+    "build:firefox": "npx --yes web-ext@8 build --source-dir . --overwrite-dest --ignore-files test scripts package.json"
+  }
+}

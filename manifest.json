@@ -1,0 +1,90 @@
+{
+  "manifest_version": 3,
+  "name": "TokenTrail — AI Token Tracker & Context Saver",
+  "short_name": "TokenTrail",
+  "version": "0.1.0",
+  "description": "See how many tokens your AI chats use before the free tier cuts you off, and save the context so you can continue anywhere.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_title": "TokenTrail",
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png"
+    }
+  },
+  "background": {
+    "service_worker": "src/background.js",
+    "scripts": ["src/lib/browser.js", "src/lib/sites.js", "src/lib/storage.js", "src/background.js"]
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
+  },
+  "permissions": ["storage", "unlimitedStorage", "scripting", "activeTab"],
+  "host_permissions": [
+    "https://chatgpt.com/*",
+    "https://chat.openai.com/*",
+    "https://claude.ai/*",
+    "https://gemini.google.com/*",
+    "https://chat.deepseek.com/*",
+    "https://www.perplexity.ai/*",
+    "https://perplexity.ai/*",
+    "https://copilot.microsoft.com/*",
+    "https://chat.mistral.ai/*",
+    "https://grok.com/*",
+    "https://poe.com/*",
+    "https://www.meta.ai/*",
+    "https://huggingface.co/chat/*",
+    "https://chat.qwen.ai/*",
+    "https://www.kimi.com/*"
+  ],
+  "optional_host_permissions": ["*://*/*"],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://chatgpt.com/*",
+        "https://chat.openai.com/*",
+        "https://claude.ai/*",
+        "https://gemini.google.com/*",
+        "https://chat.deepseek.com/*",
+        "https://www.perplexity.ai/*",
+        "https://perplexity.ai/*",
+        "https://copilot.microsoft.com/*",
+        "https://chat.mistral.ai/*",
+        "https://grok.com/*",
+        "https://poe.com/*",
+        "https://www.meta.ai/*",
+        "https://huggingface.co/chat/*",
+        "https://chat.qwen.ai/*",
+        "https://www.kimi.com/*"
+      ],
+      "js": [
+        "src/lib/browser.js",
+        "src/lib/sites.js",
+        "src/lib/tokenizer.js",
+        "src/lib/storage.js",
+        "src/lib/handoff.js",
+        "src/lib/ui.js",
+        "src/content/adapters.js",
+        "src/content/overlay.js",
+        "src/content/content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "tokentrail@shauryasri14.github.io",
+      "strict_min_version": "121.0",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
+    }
+  }
+}
