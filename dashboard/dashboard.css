@@ -80,6 +80,7 @@ body { min-height: 100vh; }
 .drawer.open { transform: none; }
 .drawer-head { display: flex; justify-content: space-between; gap: 12px; padding: 20px 22px 12px; }
 .drawer-title { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; min-width: 0; }
+.drawer-head > .btn { align-self: flex-start; }
 .drawer-title h2 { font-size: 19px; line-height: 1.3; }
 .drawer-title p { margin: 0; font-size: 12.5px; }
 .drawer-usage { padding: 0 22px; }
