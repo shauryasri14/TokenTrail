@@ -5,7 +5,7 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "test": "node --test test/",
+    "test": "node --test \"test/*.test.js\"",
     "icons": "node scripts/make-icons.js",
     "lint": "npx --yes web-ext@8 lint --source-dir . --ignore-files test scripts package.json README.md",
     "build:firefox": "npx --yes web-ext@8 build --source-dir . --overwrite-dest --ignore-files test scripts package.json"
