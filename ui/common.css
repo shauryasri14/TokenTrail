@@ -1,0 +1,110 @@
+/* Shared design tokens + components for popup, dashboard and options. */
+:root {
+  --bg: #f6f7fb;
+  --bg-2: #ffffff;
+  --card: rgba(255, 255, 255, 0.78);
+  --line: rgba(22, 24, 39, 0.09);
+  --fg: #161827;
+  --muted: #62677f;
+  --soft: rgba(22, 24, 39, 0.05);
+  --accent-1: #7c5cff;
+  --accent-2: #22d3ee;
+  --accent: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+  --ok: #16a34a;
+  --warn: #d97706;
+  --danger: #dc2626;
+  --shadow: 0 1px 2px rgba(16, 18, 35, 0.04), 0 8px 28px rgba(16, 18, 35, 0.07);
+  --radius: 16px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0b0c14;
+    --bg-2: #12131e;
+    --card: rgba(255, 255, 255, 0.04);
+    --line: rgba(255, 255, 255, 0.08);
+    --fg: #eceefe;
+    --muted: #9ca1bd;
+    --soft: rgba(255, 255, 255, 0.05);
+    --ok: #22c55e;
+    --warn: #f59e0b;
+    --danger: #ef4444;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 32px rgba(0, 0, 0, 0.3);
+    color-scheme: dark;
+  }
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font: 14px/1.45 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Inter, "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+.glow {
+  background:
+    radial-gradient(600px 300px at 0% -10%, rgba(124, 92, 255, 0.18), transparent 60%),
+    radial-gradient(500px 260px at 100% 0%, rgba(34, 211, 238, 0.14), transparent 60%),
+    var(--bg);
+}
+h1, h2, h3 { margin: 0; letter-spacing: -0.015em; }
+a { color: inherit; }
+.muted { color: var(--muted); }
+.num { font-variant-numeric: tabular-nums; }
+
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 750; font-size: 15px; letter-spacing: -0.01em; }
+.brand img { width: 26px; height: 26px; }
+.brand span b { background: var(--accent); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(12px);
+}
+
+.btn {
+  appearance: none; border: 1px solid var(--line); background: var(--soft); color: var(--fg);
+  font: 600 13px/1 inherit; font-family: inherit; padding: 10px 14px; border-radius: 11px; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+  transition: transform 0.1s ease, filter 0.15s ease, background 0.15s ease;
+  text-decoration: none; white-space: nowrap;
+}
+.btn:hover { filter: brightness(1.08); background: var(--line); }
+.btn:active { transform: scale(0.97); }
+.btn:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid var(--accent-1); outline-offset: 2px; }
+.btn.primary { background: var(--accent); color: #fff; border-color: transparent; box-shadow: 0 6px 18px rgba(124, 92, 255, 0.3); }
+.btn.primary:hover { filter: brightness(1.08); }
+.btn.danger { color: var(--danger); }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; filter: none; transform: none; }
+.btn.icon { padding: 8px; border-radius: 10px; }
+.btn svg { width: 16px; height: 16px; flex: none; }
+
+.chip {
+  display: inline-flex; align-items: center; gap: 6px; padding: 3px 9px; border-radius: 99px;
+  background: var(--soft); border: 1px solid var(--line); font-size: 12px; font-weight: 600;
+}
+.dot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+
+.bar { height: 6px; border-radius: 99px; background: var(--soft); overflow: hidden; }
+.bar > i { display: block; height: 100%; border-radius: inherit; background: var(--accent); transition: width 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.bar.warn > i { background: linear-gradient(90deg, #f59e0b, #f97316); }
+.bar.danger > i { background: linear-gradient(90deg, #ef4444, #f43f5e); }
+
+input[type="text"], input[type="search"], input[type="number"], select {
+  font: inherit; color: var(--fg); background: var(--bg-2); border: 1px solid var(--line);
+  border-radius: 10px; padding: 9px 12px;
+}
+
+.toast {
+  position: fixed; left: 50%; bottom: 22px; transform: translate(-50%, 20px); opacity: 0;
+  background: var(--fg); color: var(--bg); padding: 10px 16px; border-radius: 12px; font-weight: 600;
+  box-shadow: var(--shadow); transition: all 0.25s ease; pointer-events: none; z-index: 50;
+}
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}

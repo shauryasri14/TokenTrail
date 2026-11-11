@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TokenTrail</title>
+  <link rel="stylesheet" href="../ui/common.css" />
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body class="glow">
+  <header>
+    <div class="brand"><img src="../icons/icon48.png" alt="" /><span>Token<b>Trail</b></span></div>
+    <button class="btn icon" id="settings" title="Settings" aria-label="Settings">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    </button>
+  </header>
+
+  <main id="tracking" hidden>
+    <section class="card hero">
+      <div class="gauge">
+        <div id="ring"></div>
+        <div class="gauge-label">
+          <strong id="pct" class="num">0%</strong>
+          <span id="used" class="muted num">0 / 0</span>
+        </div>
+      </div>
+      <div class="meta">
+        <span class="chip"><i class="dot" id="site-dot"></i><span id="site-name">—</span></span>
+        <p id="title" class="title">—</p>
+        <p id="status" class="status"></p>
+      </div>
+    </section>
+
+    <section class="stats">
+      <div class="card stat"><span>You</span><strong id="s-user" class="num">0</strong></div>
+      <div class="card stat"><span>AI</span><strong id="s-ai" class="num">0</strong></div>
+      <div class="card stat"><span>Exchanges left</span><strong id="s-left" class="num">0</strong></div>
+    </section>
+
+    <section class="actions">
+      <button class="btn primary" id="copy">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        Copy handoff prompt
+      </button>
+      <button class="btn" id="save-md" title="Download this chat as Markdown">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg>
+        .md
+      </button>
+    </section>
+    <p class="hint muted">Paste the handoff prompt into a new chat (or another AI) to continue where you left off.</p>
+    <button class="linkish" id="show-meter" hidden>Show on-page meter</button>
+  </main>
+
+  <main id="idle" hidden>
+    <section class="card empty">
+      <div class="empty-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+      </div>
+      <h2 id="idle-title">Not tracking this page</h2>
+      <p id="idle-text" class="muted">Open an AI chat (ChatGPT, Claude, Gemini, DeepSeek…) or enable TokenTrail on this site.</p>
+      <button class="btn primary" id="track" hidden>Track this site</button>
+    </section>
+  </main>
+
+  <section class="card today">
+    <div class="today-head">
+      <span class="muted">Today, all sites</span>
+      <strong id="today" class="num">0</strong>
+    </div>
+    <div id="spark" class="spark" aria-label="Tokens per day, last 7 days"></div>
+  </section>
+
+  <footer>
+    <button class="btn" id="dashboard">Open dashboard →</button>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="../src/lib/browser.js"></script>
+  <script src="../src/lib/sites.js"></script>
+  <script src="../src/lib/tokenizer.js"></script>
+  <script src="../src/lib/storage.js"></script>
+  <script src="../src/lib/handoff.js"></script>
+  <script src="../src/lib/ui.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TokenTrail Dashboard</title>
+  <link rel="icon" href="../icons/icon32.png" />
+  <link rel="stylesheet" href="../ui/common.css" />
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body class="glow">
+  <div class="shell">
+    <header class="top">
+      <div class="brand"><img src="../icons/icon48.png" alt="" /><span>Token<b>Trail</b></span></div>
+      <div class="top-actions">
+        <button class="btn" id="export-all" title="Download every saved chat as JSON">Export all</button>
+        <a class="btn" href="../options/options.html">Settings</a>
+      </div>
+    </header>
+
+    <section class="welcome card" id="welcome" hidden>
+      <div>
+        <h2>You're set up 🎉</h2>
+        <p class="muted">Open ChatGPT, Claude, Gemini or any other AI chat. A small meter appears in the corner and counts
+          tokens as you talk. When it turns amber or red, hit <b>Copy handoff</b> and paste it into a fresh chat to keep going.
+          For sites that aren't built in, click the toolbar icon and choose <b>Track this site</b>.</p>
+      </div>
+      <button class="btn" id="welcome-close">Got it</button>
+    </section>
+
+    <section class="tiles">
+      <div class="card tile"><span>Chats saved</span><strong id="t-chats" class="num">0</strong></div>
+      <div class="card tile"><span>Tokens tracked</span><strong id="t-tokens" class="num">0</strong></div>
+      <div class="card tile"><span>Today</span><strong id="t-today" class="num">0</strong><em id="t-trend"></em></div>
+      <div class="card tile"><span>Most used</span><strong id="t-top">—</strong></div>
+    </section>
+
+    <section class="charts">
+      <div class="card panel">
+        <div class="panel-head"><h3>Last 7 days</h3><span class="muted" id="week-total"></span></div>
+        <div id="week-chart" class="week-chart"></div>
+        <div id="week-legend" class="legend"></div>
+      </div>
+      <div class="card panel">
+        <div class="panel-head"><h3>By site</h3><span class="muted">saved chats</span></div>
+        <div id="site-bars" class="site-bars"></div>
+      </div>
+    </section>
+
+    <section class="list-head">
+      <h3>Saved chats</h3>
+      <div class="filters">
+        <input type="search" id="q" placeholder="Search titles and messages…" aria-label="Search chats" />
+        <select id="site-filter" aria-label="Filter by site"><option value="">All sites</option></select>
+      </div>
+    </section>
+    <section id="chats" class="chats"></section>
+    <section id="empty" class="card empty" hidden>
+      <h3>No chats yet</h3>
+      <p class="muted">Start chatting on any supported AI site and your conversations will show up here, with token counts.</p>
+    </section>
+  </div>
+
+  <div class="scrim" id="scrim" hidden></div>
+  <aside class="drawer" id="drawer" aria-hidden="true">
+    <header class="drawer-head">
+      <div class="drawer-title">
+        <span class="chip"><i class="dot" id="d-dot"></i><span id="d-site"></span></span>
+        <h2 id="d-title"></h2>
+        <p class="muted" id="d-meta"></p>
+      </div>
+      <button class="btn icon" id="d-close" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </header>
+    <div class="drawer-usage">
+      <div class="bar" id="d-bar"><i></i></div>
+      <div class="drawer-stats muted num" id="d-stats"></div>
+    </div>
+    <div class="drawer-actions">
+      <button class="btn primary" id="d-copy">Copy handoff prompt</button>
+      <button class="btn" id="d-md">Export .md</button>
+      <button class="btn" id="d-json">Export .json</button>
+      <a class="btn" id="d-open" target="_blank" rel="noopener">Open chat ↗</a>
+      <button class="btn danger" id="d-delete">Delete</button>
+    </div>
+    <div class="messages" id="d-messages"></div>
+  </aside>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="../src/lib/browser.js"></script>
+  <script src="../src/lib/sites.js"></script>
+  <script src="../src/lib/tokenizer.js"></script>
+  <script src="../src/lib/storage.js"></script>
+  <script src="../src/lib/handoff.js"></script>
+  <script src="../src/lib/ui.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>

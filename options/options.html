@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TokenTrail Settings</title>
+  <link rel="icon" href="../icons/icon32.png" />
+  <link rel="stylesheet" href="../ui/common.css" />
+  <link rel="stylesheet" href="options.css" />
+</head>
+<body class="glow">
+  <div class="shell">
+    <header class="top">
+      <div class="brand"><img src="../icons/icon48.png" alt="" /><span>Token<b>Trail</b> settings</span></div>
+      <a class="btn" href="../dashboard/dashboard.html">← Dashboard</a>
+    </header>
+
+    <section class="card group">
+      <h2>On-page meter</h2>
+      <label class="row">
+        <span><b>Show floating meter</b><small class="muted">A small draggable gauge in the corner of AI chat pages.</small></span>
+        <input type="checkbox" id="showOverlay" class="switch" />
+      </label>
+      <label class="row">
+        <span><b>Amber warning at</b><small class="muted">Percent of the chat's token budget.</small></span>
+        <span class="range"><input type="range" id="warnAt" min="30" max="95" step="5" /><output id="warnAt-out"></output></span>
+      </label>
+      <label class="row">
+        <span><b>Red warning at</b><small class="muted">You'll get a one-time prompt to save the context.</small></span>
+        <span class="range"><input type="range" id="dangerAt" min="50" max="100" step="5" /><output id="dangerAt-out"></output></span>
+      </label>
+    </section>
+
+    <section class="card group">
+      <h2>Handoff prompt</h2>
+      <label class="row">
+        <span><b>Maximum size</b><small class="muted">Tokens. Smaller fits into free tiers more easily; larger keeps more detail.</small></span>
+        <input type="number" id="handoffBudget" min="500" max="20000" step="250" />
+      </label>
+    </section>
+
+    <section class="card group">
+      <h2>Token budget per site</h2>
+      <p class="muted intro">Free tiers don't publish exact limits, and the counts here are estimates. If a site usually cuts you off
+        around a certain size, set its budget to match. Leave a field empty to use the default.</p>
+      <div class="limits" id="limits"></div>
+    </section>
+
+    <section class="card group">
+      <h2>Extra sites</h2>
+      <p class="muted intro">Sites you enabled with <b>Track this site</b> from the toolbar popup.</p>
+      <ul class="custom" id="custom"></ul>
+    </section>
+
+    <section class="card group">
+      <h2>Your data</h2>
+      <p class="muted intro">Everything is stored in this browser only. Nothing is sent anywhere.</p>
+      <div class="row-actions">
+        <button class="btn danger" id="clear">Delete all saved chats &amp; usage</button>
+      </div>
+    </section>
+  </div>
+  <div class="toast" id="toast"></div>
+
+  <script src="../src/lib/browser.js"></script>
+  <script src="../src/lib/sites.js"></script>
+  <script src="../src/lib/tokenizer.js"></script>
+  <script src="../src/lib/storage.js"></script>
+  <script src="../src/lib/ui.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>
